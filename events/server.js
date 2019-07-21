@@ -14,12 +14,12 @@ app.use(bodyParser.urlencoded({extended: true}));
 // Template Parsing
 app.set('view engine', 'ejs');
 //  Importing all related JS and CSS files for the app
-app.use('/js',express.static(__dirname+'/node_modules/boostrap/dist/js'));
+app.use('/js',express.static(__dirname+'/node_modules/bootstrap/dist/js'));
 app.use('/js',express.static(__dirname+'/node_modules/tether/dist/js'));
 app.use('/js',express.static(__dirname+'/node_modules/jquery/dist'));
-app.use('/css',express.static(__dirname+'/node_modules/boostrap/dist/css'));
+app.use('/css',express.static(__dirname+'/node_modules/bootstrap/dist/css'));
 //Global site title and base URL
-const simpleTitle = "Simple CRUD application";
+const siteTitle = "Simple CRUD application";
 const baseURL = "http://localhost:3000/";
 //Create Database Connection
 
@@ -31,16 +31,16 @@ database: "inventory"
 });
   
 // Select the value of the table when at the baseURL
-app.get('/',function(res,req){
+app.get('/',function(req,res){
 // mysqlconnect.query("SELECT * FROM inventory",function(err,result){
 //     if(err) throw err;   
 res.render('pages/index',{
-    simpleTitle: siteTitle,
+    siteTitle: siteTitle,
     pageTitle: "Event list",
-    item: result
-});
-});
+    item: ''
 // });
+});
+});
 
 
 

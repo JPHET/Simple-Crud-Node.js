@@ -62,7 +62,6 @@ app.get('/item/add',function(req,res){
         items:''           
     });
 });
-
 app.post('/item/add',function(req,res){
     var query = "INSERT INTO `items` (name,qty,amount) VALUES(";
         query += "'"+req.body.name+"',";
@@ -86,7 +85,6 @@ app.get('/item/edit/:id', function(req,res){
         });
     });
 });
-
 //input the post data to the database
 app.post('/item/edit/:id',function(req,res){
     var query = "UPDATE `items` SET";
@@ -101,8 +99,16 @@ app.post('/item/edit/:id',function(req,res){
         }  
     });
 });
-
-
+/*
+* Delete data from database
+*/
+app.get('/item/delete/:id',function(req,res){
+    mysqlconnect.query("DELETE FROM items WHERE id="+req.params.id+"",function(err,result){
+        if(result.affectedRows){
+            res.redirect(baseURL);
+        }
+    });
+});
 /**
  * CONNECT TO SERVER
  **/ 

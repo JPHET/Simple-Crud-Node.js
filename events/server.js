@@ -41,7 +41,26 @@ app.get('/',function(req,res){
     });
 });
 
+//ADD items to database
+app.get('/item/add',function(req,res){
+  
+    res.render('pages/add-items',{
+        siteTitle: siteTitle,
+        pageTitle: "Add new item",
+        items:''           
+    });
+});
 
+app.post('/item/add',function(req,res){
+    var query = "INSERT INTO `items` (name,qty,amount) VALUES(";
+        query += "'"+req.body.name+"',";
+        query += "'"+req.body.qty+"',";
+        query += "'"+req.body.amount+"')";
+
+        mysqlconnect.query(query,function(err,result){
+            res.redirect(baseURL);
+        });
+});
 
 // CONNECT TO SERVER
 const server = app.listen(3000,function(){

@@ -32,16 +32,14 @@ database: "inventory"
   
 // Select the value of the table when at the baseURL
 app.get('/',function(req,res){
-// mysqlconnect.query("SELECT * FROM inventory",function(err,result){
-//     if(err) throw err;   
-res.render('pages/index',{
-    siteTitle: siteTitle,
-    pageTitle: "Event list",
-    item: ''
-// });
+    mysqlconnect.query("SELECT * FROM items",function(err,result){ 
+        res.render('pages/index',{
+            siteTitle: siteTitle,
+            pageTitle: "Simple Crud Application",
+            items: result           
+        });
+    });
 });
-});
-
 
 
 

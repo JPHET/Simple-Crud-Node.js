@@ -1,41 +1,44 @@
-
 <% include ../partials/header%>
-<style>.addbtn{display:none;}</style>
+<style>
+    .addbtn {
+        display: none;
+    }
+</style>
 <div class="container" style="margin-top:26px">
     <div class="row">
         <div class="col-md-12">
-<form action="http://localhost:3000/item/edit/<%= item[0].id %>" method ="POST" class="form-horizontal ">
-            <input type="hidden" name="id" value="<%= item[0].id %>">
-            <!-- Textbox for name -->
-              <div class="form-group">
-                  <label for="name" class="control-label col-md-2">Name</label>
-                  <div class="col-sm-12">
-                      <input type="text" name="name" value="<%= item[0].name %>" class="form-control" required>
-                  </div>
-              </div>
-              <!-- Textbox for qty -->
-              <div class="form-group">
-                      <label for="qty" class="control-label col-md-2">Quantity</label>
-                      <div class="col-sm-12">
-                          <input type="number" name="qty" value="<%= item[0].qty %>" class="form-control" required>
-                      </div>
-              </div>
-              <!-- Textbox for amount -->
-              <div class="form-group">
-                      <label for="amount" class="control-label col-md-2">Amount</label>
-                      <div class="col-sm-12">
-                          <input type="number" name="amount" value="<%= item[0].amount %>" class="form-control" required> 
-                      </div>
-              </div>
+            <form action="http://localhost:3000/item/edit/<%= item[0].id %>" method="POST" class="form-horizontal ">
+                <input type="hidden" name="id" value="<%= item[0].id %>">
+                <!-- Textbox for name -->
+                <div class="form-group">
+                    <label for="name" class="control-label col-md-2">Name</label>
+                    <div class="col-sm-12">
+                        <input type="text" name="name" value="<%= item[0].name %>" class="form-control" required>
+                    </div>
+                </div>
+                <!-- Textbox for qty -->
+                <div class="form-group">
+                    <label for="qty" class="control-label col-md-2">Quantity</label>
+                    <div class="col-sm-12">
+                        <input type="number" name="qty" value="<%= item[0].qty %>" class="form-control" required>
+                    </div>
+                </div>
+                <!-- Textbox for amount -->
+                <div class="form-group">
+                    <label for="amount" class="control-label col-md-2">Amount</label>
+                    <div class="col-sm-12">
+                        <input type="number" name="amount" value="<%= item[0].amount %>" class="form-control" required>
+                    </div>
+                </div>
                 <!-- Textbox for submit btn -->
                 <div class="form-group">
-                      <div class="col-sm-12" style="text-align: center">
-                          <input type="submit" name="submit" value="Save" class="btn btn-primary btn-lg"> 
-                      </div>
-              </div>
-        </form>
+                    <div class="col-sm-12" style="text-align: center">
+                        <input type="submit" name="submit" value="Save" class="btn btn-primary btn-lg">
+                    </div>
+                </div>
+            </form>
         </div>
-    </div> 
+    </div>
 </div>
 
 <% include ../partials/footer%>

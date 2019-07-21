@@ -1,0 +1,6 @@
+Hi! this is the complete script of on how I created the database of the CRUD App.
+
+CREATE DATABASE IF NOT EXISTS inventory ; 
+CREATE TABLE IF NOT EXISTS items(id int AUTO_INCREMENT NOT NULL
+, name VARCHAR(255)NOT NULL ,qty int(30) NOT NULL,amount VARCHAR
+(255) NOT NULL, PRIMARY KEY(id))

@@ -9,28 +9,38 @@ const http = require('http');
 const mysql = require('mysql');
 const app = express();
 const bodyParser= require('body-parser');
-// parse all the data
+/** 
+ * parse all the data
+ * */ 
 app.use(bodyParser.urlencoded({extended: true}));
-// Template Parsing
+/**
+ * Template Parsing
+ * */ 
 app.set('view engine', 'ejs');
-//  Importing all related JS and CSS files for the app
+/**
+ * Importing all related JS and CSS files for the app
+ * */  
 app.use('/js',express.static(__dirname+'/node_modules/bootstrap/dist/js'));
 app.use('/js',express.static(__dirname+'/node_modules/tether/dist/js'));
 app.use('/js',express.static(__dirname+'/node_modules/jquery/dist'));
 app.use('/css',express.static(__dirname+'/node_modules/bootstrap/dist/css'));
-//Global site title and base URL
+/**
+ * Global site title and base URL
+ **/
 const siteTitle = "Simple CRUD application";
 const baseURL = "http://localhost:3000/";
-//Create Database Connection
-
+/**
+ * Create Database Connection
+ **/
 const mysqlconnect = mysql.createConnection({
 host: "localhost",
 user: "root",
 password: "",
 database: "inventory"
 });
-  
-// Select the value of the table when at the baseURL
+/**
+ * Select the value of the table when at the baseURL
+ **/ 
 app.get('/',function(req,res){
     mysqlconnect.query("SELECT * FROM items",function(err,result){ 
         res.render('pages/index',{
@@ -41,7 +51,9 @@ app.get('/',function(req,res){
     });
 });
 
-//ADD items to database
+/**
+ * ADD items to database
+ **/
 app.get('/item/add',function(req,res){
   
     res.render('pages/add-items',{
@@ -61,8 +73,39 @@ app.post('/item/add',function(req,res){
             res.redirect(baseURL);
         });
 });
+/**
+ *  For updating an item
+ */
+//get the data from the database
+app.get('/item/edit/:id', function(req,res){
+    mysqlconnect.query("SELECT * FROM items WHERE id='"+req.params.id+"'",function(err,result){
+        res.render('pages/edit-items',{
+            siteTitle : siteTitle,
+            pageTitle:"Edit item details: "+ result[0].name,
+            item: result
+        });
+    });
+});
 
-// CONNECT TO SERVER
+//input the post data to the database
+app.post('/item/edit/:id',function(req,res){
+    var query = "UPDATE `items` SET";
+        query+= " `name` = '"+req.body.name+"',";
+        query+= " `qty`='"+req.body.qty+"',";
+        query+= " `amount`='"+req.body.amount+"'";
+        query+= " WHERE `id`="+req.body.id+"";
+        
+    mysqlconnect.query(query,function(err,result){
+        if(result.affectedRows) {
+            res.redirect(baseURL); 
+        }  
+    });
+});
+
+
+/**
+ * CONNECT TO SERVER
+ **/ 
 const server = app.listen(3000,function(){
     console.log("Server Started on 3000...");
 });

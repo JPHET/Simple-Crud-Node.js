@@ -22,24 +22,25 @@ app.use('/css',express.static(__dirname+'/node_modules/boostrap/dist/css'));
 const simpleTitle = "Simple CRUD application";
 const baseURL = "http://localhost:3000/";
 //Create Database Connection
-const mysqlconnect = mysqlconnect.connect({
-host: 'localhost',
-user: 'root',
-password: '',
-database: 'inventory'
+
+const mysqlconnect = mysql.createConnection({
+host: "localhost",
+user: "root",
+password: "",
+database: "inventory"
 });
   
 // Select the value of the table when at the baseURL
 app.get('/',function(res,req){
-mysqlconnect.query("SELECT * FROM inventory",function(err,result){
-    if(err) throw err;   
+// mysqlconnect.query("SELECT * FROM inventory",function(err,result){
+//     if(err) throw err;   
 res.render('pages/index',{
     simpleTitle: siteTitle,
     pageTitle: "Event list",
     item: result
 });
 });
-});
+// });
 
 
 
